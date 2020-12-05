@@ -1,0 +1,6 @@
+import '../sass/style.scss'
+import './UI/homepage'
+import './UI/product'
+import './UI/cart'
+import './UI/order'
+import './UI/order-confirm'

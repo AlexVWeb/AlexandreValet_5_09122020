@@ -1,0 +1,90 @@
+@import "~bootswatch/dist/lux/variables";
+@import "~bootstrap/scss/bootstrap";
+@import "~bootswatch/dist/lux/bootswatch";
+
+body {
+  min-height: 100vh;
+}
+
+.product {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  img {
+    @extend .img-fluid;
+    max-width: 400px;
+  }
+
+  h1 {
+    font-size: 2.5rem;
+    margin-top: 2rem;
+  }
+
+  .lense {
+    @extend .badge;
+    @extend .badge-info;
+    margin-right: 1rem;
+    font-size: 1rem;
+  }
+}
+
+.btn-cart {
+  cursor: pointer;
+}
+
+// Panier
+// ============
+.cart-item {
+  display: flex;
+  width: 100%;
+
+  & > img {
+    @extend .img-fluid;
+    max-width: 200px;
+    flex: 1 1 0;
+  }
+
+  & > &_infos {
+    flex: 2 1 0;
+    padding-left: 1rem;
+  }
+
+  &_price {
+    @extend .h4;
+  }
+
+  &_name {
+    text-transform: uppercase;
+  }
+
+  & > .btn-delete-item {
+  }
+}
+
+.animate-remove {
+  opacity: 0;
+  animation: remove .3s linear forwards;
+}
+
+.cart-subtotal {
+  float: right;
+  text-transform: uppercase;
+
+  &_price {
+    @extend .h5;
+    margin-left: 1rem;
+  }
+}
+
+@keyframes remove {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  to {
+    opacity: 0;
+    transform : translateX(-400px);
+  }
+}
