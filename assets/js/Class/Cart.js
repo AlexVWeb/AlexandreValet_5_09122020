@@ -94,7 +94,7 @@ class Cart {
     }
 
     /**
-     * Affiche le nombre de prodiut contenu dans le panier
+     * Affiche le nombre de produit contenu dans le panier
      * @returns {*}
      */
     numberProduct() {
@@ -119,7 +119,7 @@ class Cart {
     }
 
     /**
-     * Rafrachie la variable this._cart
+     * Rafraichie la variable this._cart
      * @private
      */
     _refresh() {
