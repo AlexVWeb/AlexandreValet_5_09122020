@@ -8,6 +8,10 @@ class Cart {
         this._refresh();
     }
 
+    /**
+     * Récupère l'ensemble des produits contenu dans le panier
+     * @returns {*|*[]}
+     */
     all() {
         return this._cart;
     }
@@ -26,10 +30,20 @@ class Cart {
         }
     }
 
+    /**
+     * Calcul le nombre d'item par ID de produit
+     * @param id
+     * @returns {*}
+     */
     count(id) {
         return this.get(id).count
     }
 
+    /**
+     * Augmente la quantité d'un produit dans le panier
+     * @param id
+     * @param number
+     */
     incrementCount(id, number = null) {
         let product = this.get(id)
         if (number === null) {
@@ -41,6 +55,11 @@ class Cart {
         this._refresh()
     }
 
+    /**
+     * Enlève de la quantité d'un produit dans le panier
+     * @param id
+     * @param number
+     */
     decrementCount(id, number = null) {
         let product = this.get(id)
         if (number === null) {
@@ -55,6 +74,10 @@ class Cart {
         }
     }
 
+    /**
+     * Supprime un produit par son ID dans le panier
+     * @param id
+     */
     remove(id) {
         let product = this.get(id)
         let filter = this.all().filter(el => el !== product)
@@ -62,32 +85,60 @@ class Cart {
         this._refresh()
     }
 
+    /**
+     * Récupère un produit dans le panier par son ID
+     * @param id
+     */
     get(id) {
         return this._cart.find(item => item.id === id)
     }
 
+    /**
+     * Affiche le nombre de prodiut contenu dans le panier
+     * @returns {*}
+     */
     numberProduct() {
         return this.all().reduce((acc, product) => acc + parseInt(product.count), 0)
     }
 
+    /**
+     * Affiche le montant totale du panier
+     * @returns {*}
+     */
     getTotalPrice() {
         return this.all().reduce((acc, product) => acc + (product.price * product.count), 0);
     }
 
+    /**
+     * Vérifie si un produit est déja dans le panier
+     * @param id
+     * @returns {boolean}
+     */
     has(id) {
         return this._cart.some(product => product.id === id)
     }
 
+    /**
+     * Rafrachie la variable this._cart
+     * @private
+     */
     _refresh() {
         this._cart = JSON.parse(this._storage.getItem(KEY)) || []
     }
 
-
+    /**
+     * Réinitialise le panier
+     */
     reset() {
         this._storage.setItem(KEY, JSON.stringify([]))
         this._refresh()
     }
 
+    /**
+     * Affiche un produit pas son ID dans la page panier
+     * @param product_id
+     * @returns {Promise<string>}
+     */
     async show(product_id) {
         let countInCart = this.count(product_id)
         const product = await Product.get(product_id)
