@@ -88,3 +88,18 @@ body {
     transform : translateX(-400px);
   }
 }
+
+#count_product {
+  color: white;
+  background: red;
+  width: 25px;
+  height: 25px;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-weight: bold;
+  margin-left: 8px;
+  font-size: 1rem;
+}

@@ -6,6 +6,7 @@ class Cart {
     constructor() {
         this._storage = window.localStorage;
         this._refresh();
+        this.refreshCountProductNavbar()
     }
 
     /**
@@ -25,8 +26,10 @@ class Cart {
             this._cart.push(product)
             this._storage.setItem(KEY, JSON.stringify(this._cart))
             this._refresh()
+            this.refreshCountProductNavbar()
         } else {
             this.incrementCount(product.id)
+            this.refreshCountProductNavbar()
         }
     }
 
@@ -53,6 +56,7 @@ class Cart {
         }
         this._storage.setItem(KEY, JSON.stringify(this._cart))
         this._refresh()
+        this.refreshCountProductNavbar()
     }
 
     /**
@@ -69,8 +73,10 @@ class Cart {
         }
         this._storage.setItem(KEY, JSON.stringify(this._cart))
         this._refresh()
+        this.refreshCountProductNavbar()
         if (this.count(id) < 1) {
             this.remove(id)
+            this.refreshCountProductNavbar()
         }
     }
 
@@ -83,6 +89,7 @@ class Cart {
         let filter = this.all().filter(el => el !== product)
         this._storage.setItem(KEY, JSON.stringify(filter))
         this._refresh()
+        this.refreshCountProductNavbar()
     }
 
     /**
@@ -132,6 +139,16 @@ class Cart {
     reset() {
         this._storage.setItem(KEY, JSON.stringify([]))
         this._refresh()
+    }
+
+    /**
+     * Rafraichie le compteur du menu
+     */
+    refreshCountProductNavbar() {
+        const count_product = document.querySelector('#count_product')
+        if (count_product) {
+            count_product.innerText = this.numberProduct()
+        }
     }
 
     /**
